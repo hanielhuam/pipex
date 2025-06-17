@@ -24,7 +24,10 @@ int	*init_numbers(int size, char **argv)
 
 	numbers = ft_calloc(size + 1, sizeof(int));
 	if (!numbers)
+	{
+		ft_printf("allocation error at numbers\n");
 		return (NULL);
+	}
 	i = 0;
 	while (i < size)
 	{
@@ -55,42 +58,112 @@ int	sum_numbers(int size, int nproc, int *numbers, int i)
 	return (sum);
 }
 
-int	main(int argc, char **argv)
+void	close_all_fds(int **fds)
+{
+	
+}
+
+int	*process_numbers(int size, int nproc, int *numbers, int **fds)
 {
 	int	i;
-	int nproc;
-	int size;
-	int	*numbers;
-	int	pid;
+	int pid;
+	int	*sum;
+	int *temp;
 
-	if (argc < 3)
-		return (0);
-	nproc = ft_atoi(argv[1]);
-
-	size = argc - 2;
-	numbers = init_numbers(size, argv);
-	if (!numbers)
-	{
-		ft_printf("erro de alocação\n");
-		return (0);
-	}
-	pid = 0;
-	i = 0;
 	while (i < nproc)
 	{
 		pid = fork();
 		if (pid == -1)
 		{
 			ft_printf("erro no fork\n");
-			return (0);
+			return (NULL);
 		}
 		if (pid == 0)
 		{
-			//child process
 			sum_numbers(size, nproc, numbers, i);
+			comunicate_process;
 			break;
 		}
 	}
+}
+
+void	clear_fds(int **fds)
+{
+	int **init;
+
+	init = fds;
+	if (!fds || !*fds)
+		return ;
+	while (*fds)
+		free(*fds++);
+	free(init);
+}
+
+int	**init_fds(int size, int nproc)
+{
+	int	i;
+	int	**fds;
+
+	fds = ft_calloc(n_proc + 1, sizeof(int *));
+	if (!fds)
+	{
+		ft_printf("allocation error at fds\n");
+		return (NULL);
+	}
+	i = 0;
+	while (i < nproc)
+	{
+		fds[i] = ft_calloc(2, sizeof(int));
+		if (!fd[i])
+		{
+			ft_printf("Allocation error at fds\n");
+			break;
+		}
+		i++;
+	}
+	if (i == nproc - 1)
+		return fds;
+	clear_fds(fds);
+	return (NULL);
+}
+
+int	**init_pipes(int size, int nproc)
+{
+	int	i;
+	int **pipes;
+
+	pipes = init_fds(size, nproc);
+	if (!pipes)
+		return (NULL);
+	i = 0;
+	while (i < nproc)
+	{
+		if (pipe(pipes[i]) == -1)
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	int nproc;
+	int size;
+	int	*numbers;
+	int **pipes;
+
+	if (argc < 3)
+		return (0);
+	nproc = ft_atoi(argv[1]);
+	size = argc - 2;
+	numbers = init_numbers(size, argv);
+	if (!numbers)
+		return (0);
+	pipes = init_pipes();
+	if (!fds)
+	{
+		free(numbers);
+		return (0);
+	}
+	process_numbers(size, nproc, )
 	free(numbers);
+	clear_fds(fds);
 	return (0);
 }
