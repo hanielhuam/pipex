@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:20:21 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/06/13 19:01:13 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/06/16 21:25:53 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,27 @@ int	*init_numbers(int size, char **argv)
 		i++;
 	}
 	return (numbers);
+}
+
+int	calculate_init(int size, int nproc, int i)
+{
+	if (i < size % process)
+		return ((size / process) * i + i);
+	else
+		return ((size / process) * i + (siz % process);
+}
+
+int	sum_numbers(int size, int nproc, int *numbers, int i)
+{
+	int	init;
+	int end;
+	int sum;
+
+	init = calculate_init(size, nproc, i).
+	end = init + size / nproc + (i < size % nproc);
+	while (init < end)
+		sum += numbers[init++];
+	return (sum);
 }
 
 int	main(int argc, char **argv)
@@ -66,7 +87,7 @@ int	main(int argc, char **argv)
 		if (pid == 0)
 		{
 			//child process
-			// fazer a somatória dis size/
+			sum_numbers(size, nproc, numbers, i);
 			break;
 		}
 	}
