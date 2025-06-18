@@ -58,40 +58,24 @@ int	sum_numbers(int size, int nproc, int *numbers, int i)
 	return (sum);
 }
 
-void	clear_fds(int **fds)
+void	child_process(int size, int nproc, int *numbers, int **pipes, int i)
 {
-	int **init;
-
-	init = fds;
-	if (!fds || !*fds)
-		return ;
-	while (*fds)
-		free(*fds++);
-	free(init);
+	int	sum;
+	int temp;
 }
 
-void	close_all_pipes(int **pipes)
+void	parent_process()
 {
-	int	i;
-
-	if (!pipes || !*pipes)
-		return (NULL);
-	i = 0;
-	while (pipes[i])
-	{
-		close(pipes[i][0]);
-		close(pipes[i++][0]);
-	}
-	clear_fds(pipes);
+	
 }
 
 int	*process_numbers(int size, int nproc, int *numbers, int **pipes)
 {
 	int	i;
 	int pid;
-	int	*sum;
-	int *temp;
 
+	i = 0;
+	pid = 0;
 	while (i < nproc)
 	{
 		pid = fork();
@@ -102,60 +86,11 @@ int	*process_numbers(int size, int nproc, int *numbers, int **pipes)
 		}
 		if (pid == 0)
 		{
-			sum_numbers(size, nproc, numbers, i);
+			sum = sum_numbers(size, nproc, numbers, i);
 			comunicate_process;
 			break;
 		}
 	}
-}
-
-int	**init_fds(int size, int nproc)
-{
-	int	i;
-	int	**fds;
-
-	fds = ft_calloc(n_proc + 1, sizeof(int *));
-	if (!fds)
-	{
-		ft_printf("allocation error at fds\n");
-		return (NULL);
-	}
-	i = 0;
-	while (i < nproc)
-	{
-		fds[i] = ft_calloc(2, sizeof(int));
-		if (!fd[i])
-		{
-			ft_printf("Allocation error at fds\n");
-			break;
-		}
-		i++;
-	}
-	if (i == nproc - 1)
-		return fds;
-	clear_fds(fds);
-	return (NULL);
-}
-
-int	**init_pipes(int size, int nproc)
-{
-	int	i;
-	int **pipes;
-
-	pipes = init_fds(size, nproc);
-	if (!pipes)
-		return (NULL);
-	i = 0;
-	while (i < nproc)
-	{
-		if (pipe(pipes[i]) == -1)
-		{
-			ft_printf("pipe creation fail\n");
-			close_all_pipes(pipes);
-			return (NULL);
-		}
-	}
-	return (pipes);
 }
 
 int	main(int argc, char **argv)
@@ -172,13 +107,13 @@ int	main(int argc, char **argv)
 	numbers = init_numbers(size, argv);
 	if (!numbers)
 		return (0);
-	pipes = init_pipes();
-	if (!fds)
+	pipes = init_pipes(size, nproc);
+	if (!pipes)
 	{
 		free(numbers);
 		return (0);
 	}
-	process_numbers(size, nproc, )
+	process_numbers(size, nproc, numbers, pipes)
 	free(numbers);
 	clear_all_pipes(pipes);
 	return (0);

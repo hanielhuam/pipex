@@ -18,4 +18,7 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+int		**init_pipes(int size, int nproc);
+void	clear_all_pipes(int **pipe);
+
 #endif
