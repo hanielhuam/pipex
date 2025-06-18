@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:20:21 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/06/16 21:25:53 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/06/17 21:28:56 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,34 @@ int	sum_numbers(int size, int nproc, int *numbers, int i)
 	return (sum);
 }
 
-void	close_all_fds(int **fds)
+void	clear_fds(int **fds)
 {
-	
+	int **init;
+
+	init = fds;
+	if (!fds || !*fds)
+		return ;
+	while (*fds)
+		free(*fds++);
+	free(init);
 }
 
-int	*process_numbers(int size, int nproc, int *numbers, int **fds)
+void	close_all_pipes(int **pipes)
+{
+	int	i;
+
+	if (!pipes || !*pipes)
+		return (NULL);
+	i = 0;
+	while (pipes[i])
+	{
+		close(pipes[i][0]);
+		close(pipes[i++][0]);
+	}
+	clear_fds(pipes);
+}
+
+int	*process_numbers(int size, int nproc, int *numbers, int **pipes)
 {
 	int	i;
 	int pid;
@@ -85,18 +107,6 @@ int	*process_numbers(int size, int nproc, int *numbers, int **fds)
 			break;
 		}
 	}
-}
-
-void	clear_fds(int **fds)
-{
-	int **init;
-
-	init = fds;
-	if (!fds || !*fds)
-		return ;
-	while (*fds)
-		free(*fds++);
-	free(init);
 }
 
 int	**init_fds(int size, int nproc)
@@ -139,7 +149,13 @@ int	**init_pipes(int size, int nproc)
 	while (i < nproc)
 	{
 		if (pipe(pipes[i]) == -1)
+		{
+			ft_printf("pipe creation fail\n");
+			close_all_pipes(pipes);
+			return (NULL);
+		}
 	}
+	return (pipes);
 }
 
 int	main(int argc, char **argv)
@@ -164,6 +180,6 @@ int	main(int argc, char **argv)
 	}
 	process_numbers(size, nproc, )
 	free(numbers);
-	clear_fds(fds);
+	clear_all_pipes(pipes);
 	return (0);
 }
