@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:20:21 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/06/17 21:28:56 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:52:50 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,22 @@ int	sum_numbers(int size, int nproc, int *numbers, int i)
 void	child_process(int size, int nproc, int *numbers, int **pipes, int i)
 {
 	int	sum;
-	int temp;
+
+	sum = sum_numbers(size, nproc, numbers, i);
+	if (write(pipe[i][1], &sum, sizeof(int)) == -1)
+		printf("error on write\n");
+	free(numbers);
+	close_all_pipes(pipes);
 }
 
-void	parent_process()
+void	parent_process(int nproc, int **pipes)
 {
-	
+	int	sum;
+	int temp;
+
+	sum = 0;
+	temp = 0;
+	while ()
 }
 
 int	*process_numbers(int size, int nproc, int *numbers, int **pipes)
@@ -86,8 +96,6 @@ int	*process_numbers(int size, int nproc, int *numbers, int **pipes)
 		}
 		if (pid == 0)
 		{
-			sum = sum_numbers(size, nproc, numbers, i);
-			comunicate_process;
 			break;
 		}
 	}
