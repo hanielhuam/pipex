@@ -15,7 +15,7 @@
 /*
 vamos criar n (recebe como argv[1]) processos para somar os outros números do
 restante do argv e devolver o resultado para o pai que vai printar a soma total
-*/
+
 
 int	*init_numbers(int size, char **argv)
 {
@@ -125,4 +125,4 @@ int	main(int argc, char **argv)
 	free(numbers);
 	clear_all_pipes(pipes);
 	return (0);
-}
+}*/

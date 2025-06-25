@@ -7,7 +7,7 @@ LIBFT = ${LIBFT_DIR}/bin/libft.a
 LDFLAGS = -L${LIBFT_DIR}/bin -lft 
 INCLUDE = -Iinclude -I${LIBFT_DIR}/include
 
-SRCS = ${SRC_DIR}/test.c ${SRC_DIR}/manege_pipes.c
+SRCS = ${SRC_DIR}/pipex.c
 	   
 OBJS = ${SRCS:${SRC_DIR}/%.c=${OBJ_DIR}/%.o}
 
