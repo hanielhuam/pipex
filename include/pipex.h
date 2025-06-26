@@ -18,6 +18,21 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+typedef struct s_cmd
+{
+	char	*comand;
+	char	**args;
+}			t_cmd;
+
+typedef struct s_cmd_chain
+{
+	t_list	**cmds;
+	int		fd_in;
+	int		fd_out;
+	int		**pipes;
+	char	**path;
+}			t_cmd_chain;
+
 int		**init_pipes(int size, int nproc);
 void	clear_all_pipes(int **pipe);
 
