@@ -33,7 +33,12 @@ typedef struct s_cmd_chain
 	char	**path;
 }			t_cmd_chain;
 
-int		**init_pipes(int size, int nproc);
-void	clear_all_pipes(int **pipe);
+t_cmd_chain	*create_comand_chain(int argc, char **argv, char **env);
+t_cmd_chain	*validate_chain(t_cmd_chain *chain);
+void		execute_comand_chain(t_cmd_chain *chain);
+void		clear_comand_chain(t_cmd_chain *chain);
+
+int			**init_pipes(int size, int nproc);
+void		clear_all_pipes(int **pipe);
 
 #endif
