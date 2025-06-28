@@ -7,8 +7,9 @@ LIBFT = ${LIBFT_DIR}/bin/libft.a
 LDFLAGS = -L${LIBFT_DIR}/bin -lft 
 INCLUDE = -Iinclude -I${LIBFT_DIR}/include
 
-SRCS = ${SRC_DIR}/pipex.c ${SRC_DIR}/create_comand_chain.c 
-	   
+SRCS = ${SRC_DIR}/pipex.c ${SRC_DIR}/create_comand_chain.c \
+	   ${SRC_DIR}/extract_file.c ${SRC_DIR}/clear_struct.c
+
 OBJS = ${SRCS:${SRC_DIR}/%.c=${OBJ_DIR}/%.o}
 
 NAME = pipex
