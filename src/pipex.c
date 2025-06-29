@@ -14,5 +14,9 @@ int	main(int argc, char **argv, char **env)
 	//chain = validate_chain(creat_comand_chain(argc, argv, env));
 	if (!chain)
 		return (0);
+	ft_printf("file_in is \"%s\"\n", chain->file_in->name);
+	ft_printf("file_out is \"%s\"\n", chain->file_out->name);
+	clear_files(chain->file_in, chain->file_out);
+	free(chain);
 	return (0);
 }

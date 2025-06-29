@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "libft.h"
-#include "ft_list.hh"
+#include "ft_list.h"
 #include "ft_printf.h"
 
 typedef struct s_file

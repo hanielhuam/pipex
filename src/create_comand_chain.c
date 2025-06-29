@@ -21,11 +21,15 @@ t_cmd_chain *create_comand_chain(int argc, char **argv, char **env)
 	chain = chain_allocation();
 	if (!chain)
 		return (NULL);
-	if (!file_extractor(argc, argv, chain))
+	if (extract_file(argc, argv, chain))
 	{
 		free(chain);
 		return (NULL);
 	}
+	if (extract_comands(argc, argv, chain))
+	{
+		
+	}
 	(void) env;
-	return (NULL);
+	return (chain);
 }

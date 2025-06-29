@@ -4,7 +4,7 @@
 
 static t_file	*create_t_file(char *str)
 {
-	t_tile	*file;
+	t_file	*file;
 	char	*file_name;
 
 	if (!str || !*str)
