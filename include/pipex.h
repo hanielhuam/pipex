@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:44:17 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/06/13 19:00:13 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/06/30 21:28:13 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ typedef struct s_file
 
 typedef struct s_cmd
 {
-	char	*comand;
-	char	**args;
+	char	**cmd_arg;
 }			t_cmd;
 
 typedef struct s_cmd_chain
 {
-	t_list	**cmds;
+	t_cmd	*cmds;
 	t_file	*file_in;
 	t_file	*file_out;
 	int		**pipes;

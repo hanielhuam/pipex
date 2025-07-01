@@ -16,16 +16,24 @@ void	clear_files(t_file *file_in, t_file *file_out)
 	}
 }
 
-void	clear_comands(void *comand)
+void	clear_comands(t_cmd *cmds)
 {
-	t_cmd	*cmd;
-	char	*temp;
+	t_cmd	*cmd_init;
+	char	**cmd_arg_init;
 
-	cmd = (t_cmd *)comand;
-	free(cmd->comand);
-	temp = cmd->
-	while (*(cmd->args))
-
+	cmd_init = cmds;
+	cmd_arg_init = cmd->cmd_arg;
+	while (*cmds)
+	{
+		while (*(cmd->cmd_arg))
+		{
+			free(*(cmd->cmd_arg));
+			cmd->cmd_arg++;
+		}
+		cmd++;
+	}
+	free(cmd_arg_init);
+	free(cmd_init);
 }
 
 void	clear_chain(t_cmd_chain *chain)
@@ -33,5 +41,6 @@ void	clear_chain(t_cmd_chain *chain)
 	if (chain->file_in || chain->file_out)
 		clear_files(chain->file_in, chain->file_out);
 	if (chain->cmds || *(chain->cmds))
-		ft_lstclear(chain->cmds, clear_comands);
+		clear_comands(chain->cmds);
+	free(chain);
 }

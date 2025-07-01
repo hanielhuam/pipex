@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_comand_chain.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/30 20:29:43 by hmacedo-          #+#    #+#             */
+/*   Updated: 2025/06/30 21:28:04 by hmacedo-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pipex.h"
 
@@ -28,7 +38,8 @@ t_cmd_chain *create_comand_chain(int argc, char **argv, char **env)
 	}
 	if (extract_comands(argc, argv, chain))
 	{
-		
+		clear_comand_chain(chain);
+		return (NULL);
 	}
 	(void) env;
 	return (chain);
