@@ -22,6 +22,7 @@ static t_file	*create_t_file(char *str)
 	if (!file)
 	{
 		ft_putstr_fd("Allocation Error at t_file creation\n", 2);
+		free(file_name);
 		return (NULL);
 	}
 	file->name = file_name;
