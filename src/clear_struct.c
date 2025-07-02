@@ -20,17 +20,18 @@ void	clear_comands(t_cmd *cmd)
 {
 	int	i;
 
-	if (path)
+	if (cmd->path)
 		free(path);
-	if (comand)
+	if (cmd->comand)
 		free(comand);
-	if (cmd_arg && *cmd_arg)
+	if (cmd->cmd_arg && *cmd->cmd_arg)
 	{
 		i = 0;
 		while (cmd_arg[i])
 			free(cmd_arg[i++]);
 		free(cmd_arg);
 	}
+	free(cmd);
 }
 
 void	clear_chain(t_cmd_chain *chain)
@@ -38,6 +39,9 @@ void	clear_chain(t_cmd_chain *chain)
 	if (chain->file_in || chain->file_out)
 		clear_files(chain->file_in, chain->file_out);
 	if (chain->cmds || *(chain->cmds))
+	{	
 		ft_lstclear(chain->cmds, clear_comands);
+		free(chain->cmds);
+	}
 	free(chain);
 }
