@@ -14,11 +14,19 @@
 
 static t_cmd	*compose_cmd(t_cmd *cmd, char *str)
 {
-	//allocate and fill comand
-	//allocate and fill cmd_arg
+	char	**cmd_arg;
+
+	cmd_arg = ft_split(str, ' ');
+	if (!cmd_arg || !*cmd_arg)
+	{
+		ft_putstr_fd("Allocation Error at split in cmd_args\n", 2);
+		return (NULL);
+	}
+	cmd->cmd_arg = cmd_arg;
+	return (cmd);
 }
 
-static t_list	*creat_cmd(char	*str)
+static t_list	*create_cmd(char	*str)
 {
 	t_list	*node;
 	t_cmd	*cmd;
@@ -47,7 +55,7 @@ static t_list	*creat_cmd(char	*str)
 static t_list	**create_cmd_list(int argc, char **argv)
 {
 	t_list	**list;
-	t_list	*tmep;
+	t_list	*temp;
 	int		i;
 
 	list = ft_calloc(1, sizeof(t_list *));
@@ -56,7 +64,7 @@ static t_list	**create_cmd_list(int argc, char **argv)
 		ft_putstr_fd("Allocation Error at cmd_list\n", 2);
 		return (NULL);
 	}
-	i = 2
+	i = 2;
 	while (i < argc - 1)
 	{
 		temp = create_cmd(argv[i++]);
@@ -75,7 +83,7 @@ int	 extract_comands(int argc, char **argv, t_cmd_chain *chain)
 {
 	t_list	**cmds;
 
-	chain->cmd_sz = argc - 3;
+	chain->sz_cmds = argc - 3;
 	cmds = create_cmd_list(argc, argv);
 	if (!cmds)
 		return (-1);

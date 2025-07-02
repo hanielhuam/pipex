@@ -16,25 +16,25 @@ void	clear_files(t_file *file_in, t_file *file_out)
 	}
 }
 
-void	clear_comands(t_cmd *cmd)
+void	clear_comands(void *content)
 {
-	int	i;
+	int		i;
+	t_cmd	*cmd;
 
+	cmd = (t_cmd *)content;
 	if (cmd->path)
-		free(path);
-	if (cmd->comand)
-		free(comand);
+		free(cmd->path);
 	if (cmd->cmd_arg && *cmd->cmd_arg)
 	{
 		i = 0;
-		while (cmd_arg[i])
-			free(cmd_arg[i++]);
-		free(cmd_arg);
+		while (cmd->cmd_arg[i])
+			free(cmd->cmd_arg[i++]);
+		free(cmd->cmd_arg);
 	}
 	free(cmd);
 }
 
-void	clear_chain(t_cmd_chain *chain)
+void	clear_comand_chain(t_cmd_chain *chain)
 {
 	if (chain->file_in || chain->file_out)
 		clear_files(chain->file_in, chain->file_out);

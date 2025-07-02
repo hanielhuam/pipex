@@ -28,7 +28,6 @@ typedef struct s_file
 typedef struct s_cmd
 {
 	char	*path;
-	char	*comand;
 	char	**cmd_arg;
 }			t_cmd;
 
@@ -40,6 +39,7 @@ typedef struct s_cmd_chain
 	int		**pipes;
 	char	**path;
 	int		sz_cmds;
+	char	**env;
 }			t_cmd_chain;
 
 t_cmd_chain	*create_comand_chain(int argc, char **argv, char **env);
@@ -49,7 +49,7 @@ t_cmd_chain	*validate_chain(t_cmd_chain *chain);
 void		execute_comand_chain(t_cmd_chain *chain);
 void		clear_comand_chain(t_cmd_chain *chain);
 void		clear_files(t_file *file_in, t_file *file_out);
-void		clear_comands(t_cmd	*cmd);
+void		clear_comands(void	*cmd);
 int			**init_pipes(int size, int nproc);
 void		clear_all_pipes(int **pipe);
 
