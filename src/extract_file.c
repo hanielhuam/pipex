@@ -39,6 +39,23 @@ static t_file	*create_t_file(char *str)
 	return (file);
 }
 
+static int	has_heredoc(char **argv, t_cmd_chain *chain)
+{
+	char	*limiter;
+
+	if (ft_strncmp(argv[1], "here_doc") && ft_strncmp(argv[1], "HERE_DOC"))
+		return (0);
+	chain->has_heredoc = 1;
+	limiter = ft_strdup(argv[2]);
+	if (!limiter)
+	{
+		ft_pustr_fd("Allocation Error at limiter\n", 2);
+		return (-1);
+	}
+	chain->limiter = limiter;
+	return (0);
+}
+
 int	extract_file(int argc, char **argv, t_cmd_chain *chain)
 {
 	t_file	*file_in;
@@ -55,5 +72,10 @@ int	extract_file(int argc, char **argv, t_cmd_chain *chain)
 		return (-1);
 	}
 	chain->file_out = file_out;
+	if (has_heredoc(argv, chain))
+	{
+		clear_files(file_in, file_out);
+		return (-1);
+	}
 	return (0);
 }

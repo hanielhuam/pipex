@@ -24,6 +24,15 @@ static void	show_comands(void *content)
 	ft_printf("\n");
 }
 
+static void	show_env(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+		ft_printf("%s\n", env[i++]);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_cmd_chain	*chain;
@@ -41,6 +50,7 @@ int	main(int argc, char **argv, char **env)
 	ft_printf("file_out is \"%s\"\n", chain->file_out->name);
 	ft_lstiter(*chain->cmds, show_comands);
 	ft_printf("número de comando = %d\n", chain->sz_cmds);
+	show_env(chain->path);
 	clear_comand_chain(chain);
 	return (0);
 }

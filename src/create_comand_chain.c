@@ -42,6 +42,10 @@ t_cmd_chain	*create_comand_chain(int argc, char **argv, char **env)
 		clear_comand_chain(chain);
 		return (NULL);
 	}
-	(void) env;
+	if (extract_path(env, chain))
+	{
+		clear_comand_chain(chain);
+		return (NULL);
+	}
 	return (chain);
 }

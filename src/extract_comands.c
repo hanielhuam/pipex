@@ -54,7 +54,7 @@ static t_list	*create_cmd(char	*str)
 	return (node);
 }
 
-static t_list	**create_cmd_list(int argc, char **argv)
+static t_list	**create_cmd_list(int sz_cmds, char **comands)
 {
 	t_list	**list;
 	t_list	*temp;
@@ -66,10 +66,10 @@ static t_list	**create_cmd_list(int argc, char **argv)
 		ft_putstr_fd("Allocation Error at cmd_list\n", 2);
 		return (NULL);
 	}
-	i = 2;
-	while (i < argc - 1)
+	i = 0;
+	while (i < sz_cmds)
 	{
-		temp = create_cmd(argv[i++]);
+		temp = create_cmd(comands[i++]);
 		if (!temp)
 		{
 			ft_lstclear(list, clear_comands);
@@ -85,8 +85,8 @@ int	extract_comands(int argc, char **argv, t_cmd_chain *chain)
 {
 	t_list	**cmds;
 
-	chain->sz_cmds = argc - 3;
-	cmds = create_cmd_list(argc, argv);
+	chain->sz_cmds = argc - 3 - chain->has_heredoc;
+	cmds = create_cmd_list(chain->sz_cmds, &argv[2 + chain->has_heredoc]);
 	if (!cmds)
 		return (-1);
 	chain->cmds = cmds;
