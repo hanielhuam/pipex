@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manege_pipes.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/02 21:21:47 by hmacedo-          #+#    #+#             */
+/*   Updated: 2025/07/02 21:28:11 by hmacedo-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pipex.h"
 
 static void	clear_fds(int **fds)
 {
-	int **init;
+	int	**init;
 
 	init = fds;
 	if (!fds || !*fds)
@@ -46,12 +57,12 @@ static int	**init_fds(int size, int nproc)
 		if (!fd[i])
 		{
 			ft_printf("Allocation error at fds\n");
-			break;
+			break ;
 		}
 		i++;
 	}
 	if (i == nproc - 1)
-		return fds;
+		return (fds);
 	clear_fds(fds);
 	return (NULL);
 }
@@ -59,7 +70,7 @@ static int	**init_fds(int size, int nproc)
 int	**init_pipes(int size, int nproc)
 {
 	int	i;
-	int **pipes;
+	int	**pipes;
 
 	pipes = init_fds(size, nproc);
 	if (!pipes)

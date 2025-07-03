@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 20:36:38 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/01 21:37:21 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/02 21:25:15 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static t_cmd	*compose_cmd(t_cmd *cmd, char *str)
 {
 	char	**cmd_arg;
 
+	if (!str || !*str)
+		return (NULL);
 	cmd_arg = ft_split(str, ' ');
 	if (!cmd_arg || !*cmd_arg)
 	{
@@ -79,7 +81,7 @@ static t_list	**create_cmd_list(int argc, char **argv)
 	return (list);
 }
 
-int	 extract_comands(int argc, char **argv, t_cmd_chain *chain)
+int	extract_comands(int argc, char **argv, t_cmd_chain *chain)
 {
 	t_list	**cmds;
 

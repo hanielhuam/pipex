@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   extract_file.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/02 21:19:49 by hmacedo-          #+#    #+#             */
+/*   Updated: 2025/07/02 21:20:46 by hmacedo-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pipex.h"
 
@@ -29,7 +39,7 @@ static t_file	*create_t_file(char *str)
 	return (file);
 }
 
-int	 extract_file(int argc, char **argv, t_cmd_chain *chain)
+int	extract_file(int argc, char **argv, t_cmd_chain *chain)
 {
 	t_file	*file_in;
 	t_file	*file_out;

@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clear_struct.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/02 20:47:59 by hmacedo-          #+#    #+#             */
+/*   Updated: 2025/07/02 21:10:40 by hmacedo-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pipex.h"
 
@@ -38,7 +48,7 @@ void	clear_comand_chain(t_cmd_chain *chain)
 {
 	if (chain->file_in || chain->file_out)
 		clear_files(chain->file_in, chain->file_out);
-	if (chain->cmds || *(chain->cmds))
+	if (chain->cmds)
 	{	
 		ft_lstclear(chain->cmds, clear_comands);
 		free(chain->cmds);
