@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 20:47:37 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/02 21:28:55 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:10:06 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	main(int argc, char **argv, char **env)
 	ft_lstiter(*chain->cmds, show_comands);
 	ft_printf("número de comando = %d\n", chain->sz_cmds);
 	show_env(chain->path);
+	ft_printf("here_doc is %d and limiter is %s\n", \
+			chain->has_heredoc, chain->limiter);
 	clear_comand_chain(chain);
 	return (0);
 }

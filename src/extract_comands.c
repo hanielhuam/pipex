@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 20:36:38 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/02 21:25:15 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:33:11 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ int	extract_comands(int argc, char **argv, t_cmd_chain *chain)
 	t_list	**cmds;
 
 	chain->sz_cmds = argc - 3 - chain->has_heredoc;
+	if (chain->sz_cmds < 2)
+	{
+		ft_putstr_fd("too few comands\n", 2);
+		return (-1);
+	}
 	cmds = create_cmd_list(chain->sz_cmds, &argv[2 + chain->has_heredoc]);
 	if (!cmds)
 		return (-1);
