@@ -67,7 +67,7 @@ void	clear_comand_chain(t_cmd_chain *chain)
 	if (chain->limiter)
 		free(chain->limiter);
 	if (chain->cmds)
-	{	
+	{
 		ft_lstclear(chain->cmds, clear_comands);
 		free(chain->cmds);
 	}

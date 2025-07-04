@@ -43,7 +43,7 @@ int	main(int argc, char **argv, char **env)
 		return (0);
 	}
 	chain = create_comand_chain(argc, argv, env);
-	//chain = validate_chain(creat_comand_chain(argc, argv, env));
+	//chain = validate_config_chain(creat_comand_chain(argc, argv, env));
 	if (!chain)
 		return (0);
 	ft_printf("file_in is \"%s\"\n", chain->file_in->name);
