@@ -51,6 +51,7 @@ int			extract_comands(int argc, char **argv, t_cmd_chain *chain);
 int			extract_path(char **env, t_cmd_chain *chain);
 t_cmd_chain	*validate_config_chain(t_cmd_chain *chain);
 int			has_heredoc(char **argv, t_cmd_chain *chain);
+int			open_file(t_file *file, int flags);
 void		execute_comand_chain(t_cmd_chain *chain);
 void		clear_comand_chain(t_cmd_chain *chain);
 void		clear_files(t_file *file_in, t_file *file_out);
