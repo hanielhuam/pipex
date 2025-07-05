@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 19:03:27 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/04 22:09:15 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:27:03 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,28 @@ static int	check_config_file(t_file *file_in, t_file *file_out, int heredoc)
 {
 	int	flag_in;
 	int	flag_out;
-	int	fd;
 
 	flag_in = O_RDONLY;
 	flag_out = O_WRONLY;
-	if (chain->heredoc)
+	if (heredoc)
 	{
 		flag_in = O_RDONLY | O_CREAT;
-		fla_out = O_WRONLY | O_APPEND;
+		flag_out = O_WRONLY | O_APPEND;
 	}
-	if (open_file(file_in, flags_in))
+	if (open_file(file_out, flag_out))
 		return (-1);
-	if (open_file(file_out), flag_out);
-		{
-			if (heredoc)
-				finish_heredoc
-			return (-1);
-		}
+	if (open_file(file_in, flag_in))
+	{
+		close_files(NULL, file_out, heredoc);
+		return (-1);
+	}
+	return (0);
+}
+
+int	validate_comands(t_list **cmds, char **path)
+{
+	(void)cmds;
+	(void)path;
 	return (0);
 }
 
@@ -45,6 +50,10 @@ t_cmd_chain	*validate_config_chain(t_cmd_chain *chain)
 		clear_comand_chain(chain);
 		return (NULL);
 	}
-	if (validate_comands(chain->cmds))
+	if (validate_comands(chain->cmds, chain->path))
+	{
+		close_files(chain->file_in, chain->file_out, chain->has_heredoc);
+		clear_comand_chain(chain);
+	}
 	return (chain);
 }

@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:44:17 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/04 21:40:02 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:21:52 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void		execute_comand_chain(t_cmd_chain *chain);
 void		clear_comand_chain(t_cmd_chain *chain);
 void		clear_files(t_file *file_in, t_file *file_out);
 void		clear_comands(void	*cmd);
+void		close_files(t_file *file_in, t_file *file_out, int has_heredoc);
+void		delete_heredoc(t_file *file_in);
 int			**init_pipes(int size, int nproc);
 void		clear_all_pipes(int **pipe);
 

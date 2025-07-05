@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 20:47:19 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/04 21:46:30 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:58:50 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,13 @@ int	has_heredoc(char **argv, t_cmd_chain *chain)
 	}
 	chain->limiter = limiter;
 	return (0);
+}
+
+void	delete_heredoc(t_file *file_in)
+{
+	if (file_in)
+	{
+		if (unlink(file_in->name) == -1)
+			ft_putstr_fd("Error on delete heredoc file\n", 2);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 20:47:37 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/04 22:09:09 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:15:28 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,19 @@ int	main(int argc, char **argv, char **env)
 		ft_putstr_fd("too few arguments\n", 2);
 		return (0);
 	}
-	chain = validate_config_chain(creat_comand_chain(argc, argv, env));
+	chain = validate_config_chain(create_comand_chain(argc, argv, env));
 	if (!chain)
 		return (0);
-	ft_printf("file_in is \"%s\"\n", chain->file_in->name);
-	ft_printf("file_out is \"%s\"\n", chain->file_out->name);
+	ft_printf("file_in is \"%s\" and fd is %d\n", \
+			chain->file_in->name, chain->file_in->fd);
+	ft_printf("file_out is \"%s\" and fd is %d\n", \
+			chain->file_out->name, chain->file_out->fd);
 	ft_lstiter(*chain->cmds, show_comands);
 	ft_printf("número de comando = %d\n", chain->sz_cmds);
 	show_env(chain->path);
 	ft_printf("here_doc is %d and limiter is %s\n", \
 			chain->has_heredoc, chain->limiter);
+	close_files(chain->file_in, chain->file_out, chain->has_heredoc);
 	clear_comand_chain(chain);
 	return (0);
 }
