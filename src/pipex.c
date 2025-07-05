@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 20:47:37 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/03 21:10:06 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/04 22:09:09 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	main(int argc, char **argv, char **env)
 		ft_putstr_fd("too few arguments\n", 2);
 		return (0);
 	}
-	chain = create_comand_chain(argc, argv, env);
-	//chain = validate_config_chain(creat_comand_chain(argc, argv, env));
+	chain = validate_config_chain(creat_comand_chain(argc, argv, env));
 	if (!chain)
 		return (0);
 	ft_printf("file_in is \"%s\"\n", chain->file_in->name);

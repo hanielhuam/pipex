@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:44:17 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/02 21:16:31 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/04 21:40:02 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include "libft.h"
 # include "ft_list.h"
 # include "ft_printf.h"
@@ -49,6 +50,7 @@ int			extract_file(int argc, char **argv, t_cmd_chain *chain);
 int			extract_comands(int argc, char **argv, t_cmd_chain *chain);
 int			extract_path(char **env, t_cmd_chain *chain);
 t_cmd_chain	*validate_config_chain(t_cmd_chain *chain);
+int			has_heredoc(char **argv, t_cmd_chain *chain);
 void		execute_comand_chain(t_cmd_chain *chain);
 void		clear_comand_chain(t_cmd_chain *chain);
 void		clear_files(t_file *file_in, t_file *file_out);
