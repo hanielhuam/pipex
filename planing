@@ -19,3 +19,4 @@ planejamento do projeto pipex
 		[] executar o processo
 		[] lidar com as falhas de execução
 [] desalocar toda a estrutura
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./pipex file_in asdf asdf file_out
