@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 19:03:27 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/05 22:25:13 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/06 20:26:54 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ static int	verify_comand(t_cmd *comand, char **path)
 		}
 		path++;
 	}
-	ft_putstr_fd("comando não exist: ", 2);
-	ft_putstr_fd(comand->cmd_arg[0], 2);
+	ft_putstr_fd("there is a comand which not exist\n", 2);
 	return (-1);
 }
 
