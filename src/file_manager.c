@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 17:09:44 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/05 18:51:19 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/07 21:25:39 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,34 @@ int	open_file(t_file *file, int flags)
 	}
 	file->fd = fd;
 	return (0);
+}
+
+char	*read_file(int fd, char *limiter)
+{
+	char	*s1;
+	char	*s2;
+	char	*result;
+
+	if (!limiter)
+		limiter = "";
+	s2 = get_next_line(fd);
+	if (!s2 || !ft_strncmp(s2, limiter, ft_strlen(limiter)))
+		return (NULL);
+	result = s2;
+	s1 = result;
+	while (s2 || ft_srncmp(s2, limiter, ft_strlen(limiter)))
+	{
+		free(s2);
+		s2 = get_nex_line(fd);
+		if (s2 || ft_strncmp(s2, limiter, ft_strlen(limiter)))
+		{
+			result = ft_strjoin(s1, s2);
+			free(s1);
+			s1 = result;
+		}
+	}
+	free(s2);
+	return (result);
 }
 
 void	close_files(t_file *file_in, t_file *file_out, int has_heredoc)

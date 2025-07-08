@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 20:47:37 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/06 21:30:41 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:16:27 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main(int argc, char **argv, char **env)
 	if (!chain)
 		return (0);
 	process_comand_chain(chain);
-	close_files(chain->file_in, chain->file_out, chain->has_heredoc);
-	clear_comand_chain(chain);
+	finishi_program(chain);
 	return (0);
 }

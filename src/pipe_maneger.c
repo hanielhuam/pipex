@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manege_pipes.c                                     :+:      :+:    :+:   */
+/*   pipe_maneger.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:21:47 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/02 21:28:11 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:56:43 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static void	clear_fds(int **fds)
 {
 	int	**init;
 
-	init = fds;
-	if (!fds || !*fds)
+	if (!fds)
 		return ;
+	init = fds;
 	while (*fds)
 		free(*fds++);
 	free(init);
@@ -28,62 +28,62 @@ void	close_all_pipes(int **pipes)
 {
 	int	i;
 
-	if (!pipes || !*pipes)
+	if (!pipes)
 		return (NULL);
 	i = 0;
 	while (pipes[i])
 	{
-		close(pipes[i][0]);
-		close(pipes[i++][0]);
+		if (pipes[i][0] > 2)
+			close(pipes[i][0]);
+		if (pipes[i++][1] > 2)
+			close(pipes[i][1]);
 	}
 	clear_fds(pipes);
 }
 
-static int	**init_fds(int size, int nproc)
+static int	**init_fds(int size)
 {
 	int	i;
 	int	**fds;
 
-	fds = ft_calloc(n_proc + 1, sizeof(int *));
+	fds = ft_calloc(size + 1, sizeof(int *));
 	if (!fds)
 	{
-		ft_printf("allocation error at fds\n");
+		ft_putstr_fd("allocation error at fds\n", 2);
 		return (NULL);
 	}
 	i = 0;
-	while (i < nproc)
+	while (i < size)
 	{
 		fds[i] = ft_calloc(2, sizeof(int));
-		if (!fd[i])
+		if (!fd[i++])
 		{
-			ft_printf("Allocation error at fds\n");
-			break ;
+			ft_putstr_fd("Allocation error at fds\n", 2);
+			clear_fds(fds);
+			return (NULL);
 		}
-		i++;
 	}
-	if (i == nproc - 1)
-		return (fds);
-	clear_fds(fds);
-	return (NULL);
+	return (fds);
 }
 
-int	**init_pipes(int size, int nproc)
+int	init_pipes(t_cmd_chain *chain)
 {
 	int	i;
 	int	**pipes;
 
-	pipes = init_fds(size, nproc);
+	pipes = init_fds(chain->sz_cmds + 1);
 	if (!pipes)
-		return (NULL);
+		return (-1);
 	i = 0;
-	while (i < nproc)
+	while (i < size)
 	{
-		if (pipe(pipes[i]) == -1)
+		if (pipe(pipes[i++]) == -1)
 		{
-			ft_printf("pipe creation fail\n");
+			ft_putstr_fd("pipe creation fail\n", 2);
 			close_all_pipes(pipes);
-			return (NULL);
+			return (-1);
 		}
 	}
-	return (pipes);
+	chain->pipes = pipes;
+	return (0);
 }
