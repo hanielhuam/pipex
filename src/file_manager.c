@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 17:09:44 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/07 21:25:39 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/11 22:04:09 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,14 @@ int	open_file(t_file *file, int flags)
 	return (0);
 }
 
-char	*read_file(int fd, char *limiter)
+static size_t	limiter_lenght(char *str)
+{
+	if (!*str)
+		return (1);
+	return (ft_strlen(str));
+}
+
+char	*read_file_ulimit(int fd, char *limiter)
 {
 	char	*s1;
 	char	*s2;
@@ -35,14 +42,14 @@ char	*read_file(int fd, char *limiter)
 	if (!limiter)
 		limiter = "";
 	s2 = get_next_line(fd);
-	if (!s2 || !ft_strncmp(s2, limiter, ft_strlen(limiter)))
+	if (!s2 || !ft_strncmp(s2, limiter, limiter_lenght(limiter)))
 		return (NULL);
 	result = s2;
 	s1 = result;
-	while (s2 || ft_srncmp(s2, limiter, ft_strlen(limiter)))
+	while (s2 || ft_strncmp(s2, limiter, ft_strlen(limiter)))
 	{
 		free(s2);
-		s2 = get_nex_line(fd);
+		s2 = get_next_line(fd);
 		if (s2 || ft_strncmp(s2, limiter, ft_strlen(limiter)))
 		{
 			result = ft_strjoin(s1, s2);

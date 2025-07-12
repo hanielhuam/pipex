@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:44:17 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/07 18:55:42 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/11 19:56:03 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "libft.h"
 # include "ft_list.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 typedef struct s_file
 {
@@ -52,13 +53,15 @@ int			extract_path(char **env, t_cmd_chain *chain);
 t_cmd_chain	*validate_config_chain(t_cmd_chain *chain);
 int			has_heredoc(char **argv, t_cmd_chain *chain);
 int			open_file(t_file *file, int flags);
-void		proces_comand_chain(t_cmd_chain *chain);
+char		*read_file_ulimit(int fd, char *limiter);
+void		process_comand_chain(t_cmd_chain *chain);
+void		finish_program(t_cmd_chain *chain);
 void		clear_comand_chain(t_cmd_chain *chain);
 void		clear_files(t_file *file_in, t_file *file_out);
 void		clear_comands(void	*cmd);
 void		close_files(t_file *file_in, t_file *file_out, int has_heredoc);
 void		delete_heredoc(t_file *file_in);
-int			init_pipes(int size);
-void		clear_all_pipes(int **pipe);
+int			init_pipes(t_cmd_chain *chain);
+void		close_all_pipes(int **pipe);
 
 #endif

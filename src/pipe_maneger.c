@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:21:47 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/07 18:56:43 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/11 21:01:07 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ void	close_all_pipes(int **pipes)
 	int	i;
 
 	if (!pipes)
-		return (NULL);
+		return ;
 	i = 0;
 	while (pipes[i])
 	{
 		if (pipes[i][0] > 2)
 			close(pipes[i][0]);
-		if (pipes[i++][1] > 2)
+		if (pipes[i][1] > 2)
 			close(pipes[i][1]);
+		i++;
 	}
 	clear_fds(pipes);
 }
@@ -56,7 +57,7 @@ static int	**init_fds(int size)
 	while (i < size)
 	{
 		fds[i] = ft_calloc(2, sizeof(int));
-		if (!fd[i++])
+		if (!fds[i++])
 		{
 			ft_putstr_fd("Allocation error at fds\n", 2);
 			clear_fds(fds);
@@ -75,7 +76,7 @@ int	init_pipes(t_cmd_chain *chain)
 	if (!pipes)
 		return (-1);
 	i = 0;
-	while (i < size)
+	while (i < chain->sz_cmds + 1)
 	{
 		if (pipe(pipes[i++]) == -1)
 		{
