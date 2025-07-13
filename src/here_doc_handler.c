@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 20:47:19 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/05 17:58:50 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/12 21:42:43 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,46 @@ int	has_heredoc(char **argv, t_cmd_chain *chain)
 		return (-1);
 	}
 	chain->limiter = limiter;
+	return (0);
+}
+
+static int	fill_heredoc(int fd, char *file_name, char *limiter)
+{
+	char	*content;
+
+	content = read_file_ulimit(STDIN_FILENO, limiter);
+	if (!content)
+		content = ft_calloc(1, sizeof(char));
+	ft_putstr_fd(content, fd);
+	free(content);
+	if (close(fd) == -1)
+	{
+		ft_putstr_fd("Error on close the here_doc after write\n", 2);
+		return (-1);
+	}
+	fd = open(file_name, O_RDONLY);
+	if (fd < 2)
+	{
+		ft_putstr_fd("Error on reopen here_doc\n", 2);
+		return (-1);
+	}
+	return (fd);
+}
+
+int	config_heredoc(t_cmd_chain *chain)
+{
+	int	fd;
+
+	fd = open(chain->file_in->name, O_WRONLY | O_CREAT, 0644);
+	if (fd < 2)
+	{
+		ft_putstr_fd("Error when create heredoc", 2);
+		return (-1);
+	}
+	fd = fill_heredoc(fd, chain->file_in->name, chain->limiter);
+	if (fd < 2)
+		return (-1);
+	chain->file_in->fd = fd;
 	return (0);
 }
 

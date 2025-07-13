@@ -6,29 +6,29 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 19:03:27 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/06 20:26:54 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:44:06 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	check_config_file(t_file *file_in, t_file *file_out, int heredoc)
+static int	check_config_file(t_cmd_chain *chain)
 {
-	int	flag_in;
 	int	flag_out;
 
-	flag_in = O_RDONLY;
 	flag_out = O_WRONLY;
-	if (heredoc)
-	{
-		flag_in = O_RDONLY | O_CREAT;
+	if (chain->has_heredoc)
 		flag_out = O_WRONLY | O_APPEND;
-	}
-	if (open_file(file_out, flag_out))
+	if (open_file(chain->file_out, flag_out))
 		return (-1);
-	if (open_file(file_in, flag_in))
+	if (chain->has_heredoc && config_heredoc(chain))
 	{
-		close_files(NULL, file_out, heredoc);
+		close_files(NULL, chain->file_out, chain->has_heredoc);
+		return (-1);
+	}
+	else if (!chain->has_heredoc && open_file(chain->file_in, O_RDONLY))
+	{
+		close_files(NULL, chain->file_out, chain->has_heredoc);
 		return (-1);
 	}
 	return (0);
@@ -96,7 +96,7 @@ t_cmd_chain	*validate_config_chain(t_cmd_chain *chain)
 {
 	if (!chain)
 		return (NULL);
-	if (check_config_file(chain->file_in, chain->file_out, chain->has_heredoc))
+	if (check_config_file(chain))
 	{
 		clear_comand_chain(chain);
 		return (NULL);

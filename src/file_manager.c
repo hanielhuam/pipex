@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 17:09:44 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/11 22:04:09 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:12:36 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ char	*read_file_ulimit(int fd, char *limiter)
 	s2 = get_next_line(fd);
 	if (!s2 || !ft_strncmp(s2, limiter, limiter_lenght(limiter)))
 		return (NULL);
-	result = s2;
+	result = ft_strjoin("", s2);
 	s1 = result;
-	while (s2 || ft_strncmp(s2, limiter, ft_strlen(limiter)))
+	while (s2 && ft_strncmp(s2, limiter, limiter_lenght(limiter)))
 	{
 		free(s2);
 		s2 = get_next_line(fd);
-		if (s2 || ft_strncmp(s2, limiter, ft_strlen(limiter)))
+		if (s2 && ft_strncmp(s2, limiter, limiter_lenght(limiter)))
 		{
 			result = ft_strjoin(s1, s2);
 			free(s1);

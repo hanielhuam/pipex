@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:44:17 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/11 19:56:03 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/12 21:15:02 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int			extract_comands(int argc, char **argv, t_cmd_chain *chain);
 int			extract_path(char **env, t_cmd_chain *chain);
 t_cmd_chain	*validate_config_chain(t_cmd_chain *chain);
 int			has_heredoc(char **argv, t_cmd_chain *chain);
+int			config_heredoc(t_cmd_chain *chain);
 int			open_file(t_file *file, int flags);
 char		*read_file_ulimit(int fd, char *limiter);
 void		process_comand_chain(t_cmd_chain *chain);
