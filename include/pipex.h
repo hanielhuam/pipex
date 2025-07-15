@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:44:17 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/13 21:22:42 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/14 19:30:21 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ void		close_files(t_file *file_in, t_file *file_out, int has_heredoc);
 void		delete_heredoc(t_file *file_in);
 int			init_pipes(t_cmd_chain *chain);
 void		close_all_pipes(int **pipe);
+void		close_pipes_unles(int **pipes, int in, int out);
+void		clear_fds(int **fds);
 
 #endif

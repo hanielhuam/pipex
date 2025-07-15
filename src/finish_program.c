@@ -14,7 +14,7 @@
 
 void	finish_program(t_cmd_chain *chain)
 {
-	close_all_pipes(chain->pipes);
+	//close_all_pipes(chain->pipes);
 	close_files(chain->file_in, chain->file_out, chain->has_heredoc);
 	clear_comand_chain(chain);
 }

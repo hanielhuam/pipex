@@ -6,13 +6,13 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:21:47 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/11 21:01:07 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/14 19:32:25 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	clear_fds(int **fds)
+void	clear_fds(int **fds)
 {
 	int	**init;
 
@@ -22,6 +22,24 @@ static void	clear_fds(int **fds)
 	while (*fds)
 		free(*fds++);
 	free(init);
+}
+
+void	close_pipes_unles(int **pipes, int in, int out)
+{
+	int	i;
+
+	if (!pipes)
+		return ;
+	i = 0;
+	while (pipes[i])
+	{
+		if (pipes[i][0] > 2 && i != in)
+			close(pipes[i][0]);
+		if (pipes[i][1] > 2 && i != out)
+			close(pipes[i][1]);
+		i++;
+	}
+	//clear_fds(pipes);
 }
 
 void	close_all_pipes(int **pipes)
