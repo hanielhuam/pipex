@@ -33,13 +33,13 @@ void	close_pipes_unles(int **pipes, int in, int out)
 	i = 0;
 	while (pipes[i])
 	{
+		ft_printf("pipe[%d] = %d, %d", i, pipes[i][0], pipes[i][1]);
 		if (pipes[i][0] > 2 && i != in)
 			close(pipes[i][0]);
 		if (pipes[i][1] > 2 && i != out)
 			close(pipes[i][1]);
 		i++;
 	}
-	//clear_fds(pipes);
 }
 
 void	close_all_pipes(int **pipes)

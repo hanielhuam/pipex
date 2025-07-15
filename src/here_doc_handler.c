@@ -34,11 +34,11 @@ int	has_heredoc(char **argv, t_cmd_chain *chain)
 	return (0);
 }
 
-static int	fill_heredoc(int fd, char *file_name, char *limiter)
+static int	fill_heredoc(int fd, char *file_name)
 {
 	char	*content;
 
-	content = read_file_ulimit(STDIN_FILENO, limiter);
+	content = ft_read_file(STDIN_FILENO);
 	if (!content)
 		content = ft_calloc(1, sizeof(char));
 	ft_putstr_fd(content, fd);
@@ -67,7 +67,7 @@ int	config_heredoc(t_cmd_chain *chain)
 		ft_putstr_fd("Error when create heredoc", 2);
 		return (-1);
 	}
-	fd = fill_heredoc(fd, chain->file_in->name, chain->limiter);
+	fd = fill_heredoc(fd, chain->file_in->name);
 	if (fd < 2)
 		return (-1);
 	chain->file_in->fd = fd;

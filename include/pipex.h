@@ -55,7 +55,7 @@ t_cmd_chain	*validate_config_chain(t_cmd_chain *chain);
 int			has_heredoc(char **argv, t_cmd_chain *chain);
 int			config_heredoc(t_cmd_chain *chain);
 int			open_file(t_file *file, int flags);
-char		*read_file_ulimit(int fd, char *limiter);
+char		*ft_read_file(int fd);
 void		process_comand_chain(t_cmd_chain *chain);
 void		finish_program(t_cmd_chain *chain);
 void		clear_comand_chain(t_cmd_chain *chain);

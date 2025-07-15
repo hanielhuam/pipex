@@ -26,31 +26,22 @@ int	open_file(t_file *file, int flags)
 	return (0);
 }
 
-static size_t	limiter_lenght(char *str)
-{
-	if (!*str)
-		return (1);
-	return (ft_strlen(str));
-}
-
-char	*read_file_ulimit(int fd, char *limiter)
+char	*ft_read_file(int fd)
 {
 	char	*s1;
 	char	*s2;
 	char	*result;
 
-	if (!limiter)
-		limiter = "";
 	s2 = get_next_line(fd);
-	if (!s2 || !ft_strncmp(s2, limiter, limiter_lenght(limiter)))
+	if (!s2)
 		return (NULL);
 	result = ft_strjoin("", s2);
 	s1 = result;
-	while (s2 && ft_strncmp(s2, limiter, limiter_lenght(limiter)))
+	while (s2)
 	{
 		free(s2);
 		s2 = get_next_line(fd);
-		if (s2 && ft_strncmp(s2, limiter, limiter_lenght(limiter)))
+		if (s2)
 		{
 			result = ft_strjoin(s1, s2);
 			free(s1);
