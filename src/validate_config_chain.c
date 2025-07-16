@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 19:03:27 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/13 17:44:06 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/16 18:56:27 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static int	check_config_file(t_cmd_chain *chain)
 {
-	int	flag_out;
+	int	flags;
 
-	flag_out = O_WRONLY;
+	flags = O_WRONLY | O_CREAT | O_TRUNC;
 	if (chain->has_heredoc)
-		flag_out = O_WRONLY | O_APPEND;
-	if (open_file(chain->file_out, flag_out))
+		flags = O_WRONLY | O_CREAT | O_APPEND;
+	if (open_file_mode(chain->file_out, flags, 0644))
 		return (-1);
 	if (chain->has_heredoc && config_heredoc(chain))
 	{

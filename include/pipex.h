@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:44:17 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/14 19:30:21 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/16 18:53:22 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_cmd_chain	*validate_config_chain(t_cmd_chain *chain);
 int			has_heredoc(char **argv, t_cmd_chain *chain);
 int			config_heredoc(t_cmd_chain *chain);
 int			open_file(t_file *file, int flags);
+int			open_file_mode(t_file *file, int flags, int mod);
 char		*ft_read_file(int fd);
 void		process_comand_chain(t_cmd_chain *chain);
 void		finish_program(t_cmd_chain *chain);

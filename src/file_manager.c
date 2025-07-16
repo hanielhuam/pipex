@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 17:09:44 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/13 18:12:36 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/16 18:56:50 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ int	open_file(t_file *file, int flags)
 	int	fd;
 
 	fd = open(file->name, flags);
+	if (fd == -1)
+	{
+		ft_putstr_fd("could not open file\n", 2);
+		return (-1);
+	}
+	file->fd = fd;
+	return (0);
+}
+
+int	open_file_mode(t_file *file, int flags, int mod)
+{
+	int	fd;
+
+	fd = open(file->name, flags, mod);
 	if (fd == -1)
 	{
 		ft_putstr_fd("could not open file\n", 2);

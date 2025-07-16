@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 20:47:19 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/15 20:53:44 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/16 18:48:34 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	has_heredoc(char **argv, t_cmd_chain *chain)
 	return (0);
 }
 
-static void read_and_write_from_terminal(int fd, char *limiter)
+static void	read_and_write_from_terminal(int fd, char *limiter)
 {
 	char	*content;
 
