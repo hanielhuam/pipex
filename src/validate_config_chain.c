@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 19:03:27 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/16 18:56:27 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/16 20:10:42 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static char	*is_comand_path(char *comand, char *path)
 	char	*result;
 	char	*temp;
 
+	if (access(comand, F_OK) != -1)
+		return (ft_strdup(comand));
 	temp = ft_strjoin(path, "/");
 	if (!temp)
 	{
