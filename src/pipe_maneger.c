@@ -6,7 +6,7 @@
 /*   By: hmacedo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 21:21:47 by hmacedo-          #+#    #+#             */
-/*   Updated: 2025/07/14 19:32:25 by hmacedo-         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:20:41 by hmacedo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	close_pipes_unles(int **pipes, int in, int out)
 	i = 0;
 	while (pipes[i])
 	{
-		ft_printf("pipe[%d] = %d, %d", i, pipes[i][0], pipes[i][1]);
 		if (pipes[i][0] > 2 && i != in)
 			close(pipes[i][0]);
 		if (pipes[i][1] > 2 && i != out)
